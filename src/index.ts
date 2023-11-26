@@ -1,19 +1,44 @@
-import { Application, Sprite } from 'pixi.js'
+import { Application, Container, Sprite, Graphics } from 'pixi.js'
 
 const app = new Application({
-	view: document.getElementById("pixi-canvas") as HTMLCanvasElement,
+	view: document.getElementById('pixi-canvas') as HTMLCanvasElement,
 	resolution: window.devicePixelRatio || 1,
 	autoDensity: true,
 	backgroundColor: 0x6495ed,
-	width: 640,
-	height: 480
-});
+	width: 900,
+	height: 700,
+})
 
-const clampy: Sprite = Sprite.from("clampy.png");
+const conty: Container = new Container()
+conty.x = app.screen.width / 2
+conty.y = app.screen.height / 2
 
-clampy.anchor.set(0.5);
+app.stage.addChild(conty)
 
-clampy.x = app.screen.width / 2;
-clampy.y = app.screen.height / 2;
+const solaire: Sprite = Sprite.from('images/solaireofastora.jpg')
 
-app.stage.addChild(clampy);
+const pivotCircle = new Graphics()
+pivotCircle.beginFill(0xff0000)
+pivotCircle.drawCircle(0, 0, 5) // Small circle to represent the pivot
+pivotCircle.endFill()
+
+const positionCircle = new Graphics()
+pivotCircle.beginFill(0xffffff)
+pivotCircle.drawCircle(0, 0, 5) // Small circle to represent the pivot
+pivotCircle.endFill()
+
+const graphy: Graphics = new Graphics()
+
+graphy.beginFill(0xff00ff)
+graphy.lineStyle(5, 0x00ff00).drawRect(0, 0, 100, 100)
+graphy.endFill()
+
+graphy.pivot.set(-50, -50)
+
+// Add the circle to the pivot point of the rectangle
+conty.addChild(solaire)
+graphy.addChild(positionCircle)
+graphy.addChild(pivotCircle)
+conty.addChild(graphy)
+positionCircle.position.set(graphy.position.x, graphy.position.y)
+pivotCircle.position.set(graphy.pivot.x, graphy.pivot.y)
