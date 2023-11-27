@@ -18,14 +18,14 @@ app.stage.addChild(conty)
 const solaire: Sprite = Sprite.from('images/solaireofastora.jpg')
 
 const pivotCircle = new Graphics()
-pivotCircle.beginFill(0xff0000)
+pivotCircle.beginFill(0xffffff) // Beli za pivot tacku
 pivotCircle.drawCircle(0, 0, 5) // Small circle to represent the pivot
 pivotCircle.endFill()
 
 const positionCircle = new Graphics()
-pivotCircle.beginFill(0xffffff)
-pivotCircle.drawCircle(0, 0, 5) // Small circle to represent the pivot
-pivotCircle.endFill()
+positionCircle.beginFill(0x000000) //Crni krug za poziciju
+positionCircle.drawCircle(0, 0, 5) // Small circle to represent the pivot
+positionCircle.endFill()
 
 const graphy: Graphics = new Graphics()
 
@@ -33,12 +33,16 @@ graphy.beginFill(0xff00ff)
 graphy.lineStyle(5, 0x00ff00).drawRect(0, 0, 100, 100)
 graphy.endFill()
 
-graphy.pivot.set(-50, -50)
+graphy.pivot.set(0, 50)
+graphy.position.set(0, 0)
+
+graphy.lineStyle(5, 0x00ff00).drawCircle(0, 0, 10)
+
+pivotCircle.position.set(graphy.pivot.x, graphy.pivot.y)
+positionCircle.position.set(graphy.position.x, graphy.position.y)
 
 // Add the circle to the pivot point of the rectangle
 conty.addChild(solaire)
+conty.addChild(graphy)
 graphy.addChild(positionCircle)
 graphy.addChild(pivotCircle)
-conty.addChild(graphy)
-positionCircle.position.set(graphy.position.x, graphy.position.y)
-pivotCircle.position.set(graphy.pivot.x, graphy.pivot.y)
