@@ -1,48 +1,83 @@
-import { Application, Container, Sprite, Graphics } from 'pixi.js'
+import {
+	Application,
+	Container,
+	Sprite,
+	Text,
+	Graphics,
+	BitmapText,
+	BitmapFont,
+	ParticleContainer,
+	Texture,
+} from 'pixi.js'
+import { AdvancedBloomFilter } from 'pixi-filters'
+import { Emitter, upgradeConfig } from '@pixi/particle-emitter'
+import * as particleSettings from '../static/particles/sunParticles.json'
+
+const sunFilter = new AdvancedBloomFilter({ bloomScale: 3, blur: 15, quality: 13 })
+const solaireFilter = new AdvancedBloomFilter({ bloomScale: 0.3, blur: 1 })
+const particleContainer = new ParticleContainer()
 
 const app = new Application({
 	view: document.getElementById('pixi-canvas') as HTMLCanvasElement,
 	resolution: window.devicePixelRatio || 1,
 	autoDensity: true,
 	backgroundColor: 0x6495ed,
-	width: 900,
-	height: 700,
+	width: 1920,
+	height: 1080,
 })
 
 const conty: Container = new Container()
 conty.x = app.screen.width / 2
-conty.y = app.screen.height / 2
-
-app.stage.addChild(conty)
+conty.y = app.screen.height / 3
 
 const solaire: Sprite = Sprite.from('images/solaireofastora.jpg')
+solaire.position.set(-200, 100)
 
-const pivotCircle = new Graphics()
-pivotCircle.beginFill(0xffffff) // Beli za pivot tacku
-pivotCircle.drawCircle(0, 0, 5) // Small circle to represent the pivot
-pivotCircle.endFill()
+const sun: Graphics = new Graphics()
+sun.beginFill('0xffbe6f')
+sun.drawCircle(0, 0, 250)
+sun.endFill()
+sun.angle = 30
+sun.position.set(app.screen.width / 2 - 100, -app.screen.height / 3 + 50)
 
-const positionCircle = new Graphics()
-positionCircle.beginFill(0x000000) //Crni krug za poziciju
-positionCircle.drawCircle(0, 0, 5) // Small circle to represent the pivot
-positionCircle.endFill()
+const label: Text = new Text('Solaire of Astora', {
+	fontStyle: 'oblique',
+	fontWeight: '500',
+	fontSize: 24,
+	fontFamily: 'Verdana',
+	align: 'center',
+	fill: ['#ff5c0a', '#c64600'],
+})
+label.position.set(0, -30)
 
-const graphy: Graphics = new Graphics()
+BitmapFont.from(
+	'Verdana',
+	{
+		fill: '#ffffff', // White, will be colored later
+		fontFamily: 'Verdana',
+		fontSize: 20,
+	},
+	{ chars: BitmapFont.ASCII }
+)
 
-graphy.beginFill(0xff00ff)
-graphy.lineStyle(5, 0x00ff00).drawRect(0, 0, 100, 100)
-graphy.endFill()
+const quote: BitmapText = new BitmapText('Praise The Sun!', {
+	fontSize: 20,
+	fontName: 'Verdana',
+	align: 'left',
+	tint: 0xc64600,
+})
 
-graphy.pivot.set(0, 50)
-graphy.position.set(0, 0)
+const emitter = new Emitter(particleContainer, upgradeConfig(particleSettings, Texture.from('images/particle.png')))
+emitter.autoUpdate = true // If you keep it false, you have to update your particles yourself.
+emitter.updateSpawnPos(200, 0)
+emitter.emit = true
 
-graphy.lineStyle(5, 0x00ff00).drawCircle(0, 0, 10)
+quote.text = 'If only I could be so grossely incandesant!'
+quote.position.set(0, 420)
 
-pivotCircle.position.set(graphy.pivot.x, graphy.pivot.y)
-positionCircle.position.set(graphy.position.x, graphy.position.y)
-
-// Add the circle to the pivot point of the rectangle
-conty.addChild(solaire)
-conty.addChild(graphy)
-graphy.addChild(positionCircle)
-graphy.addChild(pivotCircle)
+app.stage.addChild(conty)
+app.stage.addChild(particleContainer)
+solaire.addChild(label, quote)
+conty.addChild(solaire, sun)
+sun.filters = [sunFilter]
+solaire.filters = [solaireFilter]
