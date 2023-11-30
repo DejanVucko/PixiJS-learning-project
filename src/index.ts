@@ -1,17 +1,8 @@
-import {
-	Application,
-	Container,
-	Sprite,
-	Text,
-	Graphics,
-	BitmapText,
-	BitmapFont,
-	ParticleContainer,
-	Texture,
-} from 'pixi.js'
+import { Application, Text, Graphics, BitmapText, BitmapFont, ParticleContainer, Texture } from 'pixi.js'
 import { AdvancedBloomFilter } from 'pixi-filters'
 import { Emitter, upgradeConfig } from '@pixi/particle-emitter'
 import * as particleSettings from '../static/particles/sunParticles.json'
+import { Scene } from './scenes/Scene'
 
 const sunFilter = new AdvancedBloomFilter({ bloomScale: 3, blur: 15, quality: 13 })
 const solaireFilter = new AdvancedBloomFilter({ bloomScale: 0.3, blur: 1 })
@@ -26,19 +17,14 @@ const app = new Application({
 	height: 1080,
 })
 
-const conty: Container = new Container()
-conty.x = app.screen.width / 2
-conty.y = app.screen.height / 3
-
-const solaire: Sprite = Sprite.from('images/solaireofastora.jpg')
-solaire.position.set(-200, 100)
+const sceny: Scene = new Scene(app.screen.width, app.screen.height)
 
 const sun: Graphics = new Graphics()
 sun.beginFill('0xffbe6f')
 sun.drawCircle(0, 0, 250)
 sun.endFill()
 sun.angle = 30
-sun.position.set(app.screen.width / 2 - 100, -app.screen.height / 3 + 50)
+sun.position.set(app.screen.width - 100, 50)
 
 const label: Text = new Text('Solaire of Astora', {
 	fontStyle: 'oblique',
@@ -53,7 +39,7 @@ label.position.set(0, -30)
 BitmapFont.from(
 	'Verdana',
 	{
-		fill: '#ffffff', // White, will be colored later
+		fill: '#ffffff',
 		fontFamily: 'Verdana',
 		fontSize: 20,
 	},
@@ -68,16 +54,15 @@ const quote: BitmapText = new BitmapText('Praise The Sun!', {
 })
 
 const emitter = new Emitter(particleContainer, upgradeConfig(particleSettings, Texture.from('images/particle.png')))
-emitter.autoUpdate = true // If you keep it false, you have to update your particles yourself.
+emitter.autoUpdate = true
 emitter.updateSpawnPos(200, 0)
 emitter.emit = true
 
-quote.text = 'If only I could be so grossely incandesant!'
-quote.position.set(0, 420)
+quote.text = 'If only I could be so grossly incandescent!'
+quote.position.set(0, 400)
 
-app.stage.addChild(conty)
+app.stage.addChild(sceny, sun)
 app.stage.addChild(particleContainer)
-solaire.addChild(label, quote)
-conty.addChild(solaire, sun)
+sceny.solaire.addChild(label, quote)
 sun.filters = [sunFilter]
-solaire.filters = [solaireFilter]
+sceny.solaire.filters = [solaireFilter]
