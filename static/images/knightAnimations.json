@@ -1,0 +1,226 @@
+{
+	"frames": {
+		"_Attack.png": {
+			"frame": { "x": 0, "y": 0, "w": 480, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 480, "h": 80 },
+			"sourceSize": { "w": 480, "h": 80 }
+		},
+		"_Attack2.png": {
+			"frame": { "x": 480, "y": 0, "w": 720, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 720, "h": 80 },
+			"sourceSize": { "w": 720, "h": 80 }
+		},
+		"_Attack2NoMovement.png": {
+			"frame": { "x": 1200, "y": 0, "w": 720, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 720, "h": 80 },
+			"sourceSize": { "w": 720, "h": 80 }
+		},
+		"_AttackCombo.png": {
+			"frame": { "x": 0, "y": 80, "w": 1200, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 1200, "h": 80 },
+			"sourceSize": { "w": 1200, "h": 80 }
+		},
+		"_AttackComboNoMovement.png": {
+			"frame": { "x": 0, "y": 160, "w": 1200, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 1200, "h": 80 },
+			"sourceSize": { "w": 1200, "h": 80 }
+		},
+		"_AttackNoMovement.png": {
+			"frame": { "x": 1200, "y": 160, "w": 480, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 480, "h": 80 },
+			"sourceSize": { "w": 480, "h": 80 }
+		},
+		"_Crouch.png": {
+			"frame": { "x": 1680, "y": 160, "w": 120, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 120, "h": 80 },
+			"sourceSize": { "w": 120, "h": 80 }
+		},
+		"_CrouchAll.png": {
+			"frame": { "x": 0, "y": 240, "w": 360, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 360, "h": 80 },
+			"sourceSize": { "w": 360, "h": 80 }
+		},
+		"_CrouchAttack.png": {
+			"frame": { "x": 360, "y": 240, "w": 480, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 480, "h": 80 },
+			"sourceSize": { "w": 480, "h": 80 }
+		},
+		"_CrouchTransition.png": {
+			"frame": { "x": 840, "y": 240, "w": 120, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 120, "h": 80 },
+			"sourceSize": { "w": 120, "h": 80 }
+		},
+		"_CrouchWalk.png": {
+			"frame": { "x": 960, "y": 240, "w": 960, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 960, "h": 80 },
+			"sourceSize": { "w": 960, "h": 80 }
+		},
+		"_Dash.png": {
+			"frame": { "x": 0, "y": 320, "w": 240, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 240, "h": 80 },
+			"sourceSize": { "w": 240, "h": 80 }
+		},
+		"_Death.png": {
+			"frame": { "x": 240, "y": 320, "w": 1200, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 1200, "h": 80 },
+			"sourceSize": { "w": 1200, "h": 80 }
+		},
+		"_DeathNoMovement.png": {
+			"frame": { "x": 0, "y": 400, "w": 1200, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 1200, "h": 80 },
+			"sourceSize": { "w": 1200, "h": 80 }
+		},
+		"_Fall.png": {
+			"frame": { "x": 1200, "y": 400, "w": 360, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 360, "h": 80 },
+			"sourceSize": { "w": 360, "h": 80 }
+		},
+		"_Hit.png": {
+			"frame": { "x": 1560, "y": 400, "w": 120, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 120, "h": 80 },
+			"sourceSize": { "w": 120, "h": 80 }
+		},
+		"_Idle.png": {
+			"frame": { "x": 0, "y": 480, "w": 1200, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 1200, "h": 80 },
+			"sourceSize": { "w": 1200, "h": 80 }
+		},
+		"_Jump.png": {
+			"frame": { "x": 1200, "y": 480, "w": 360, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 360, "h": 80 },
+			"sourceSize": { "w": 360, "h": 80 }
+		},
+		"_JumpFallInbetween.png": {
+			"frame": { "x": 1560, "y": 480, "w": 240, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 240, "h": 80 },
+			"sourceSize": { "w": 240, "h": 80 }
+		},
+		"_Roll.png": {
+			"frame": { "x": 0, "y": 560, "w": 1440, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 1440, "h": 80 },
+			"sourceSize": { "w": 1440, "h": 80 }
+		},
+		"_Run.png": {
+			"frame": { "x": 0, "y": 640, "w": 1200, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 1200, "h": 80 },
+			"sourceSize": { "w": 1200, "h": 80 }
+		},
+		"_Slide.png": {
+			"frame": { "x": 1200, "y": 640, "w": 240, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 240, "h": 80 },
+			"sourceSize": { "w": 240, "h": 80 }
+		},
+		"_SlideAll.png": {
+			"frame": { "x": 1440, "y": 640, "w": 480, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 480, "h": 80 },
+			"sourceSize": { "w": 480, "h": 80 }
+		},
+		"_SlideTransitionEnd.png": {
+			"frame": { "x": 0, "y": 720, "w": 120, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 120, "h": 80 },
+			"sourceSize": { "w": 120, "h": 80 }
+		},
+		"_SlideTransitionStart.png": {
+			"frame": { "x": 120, "y": 720, "w": 120, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 120, "h": 80 },
+			"sourceSize": { "w": 120, "h": 80 }
+		},
+		"_TurnAround.png": {
+			"frame": { "x": 240, "y": 720, "w": 360, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 360, "h": 80 },
+			"sourceSize": { "w": 360, "h": 80 }
+		},
+		"_WallClimb.png": {
+			"frame": { "x": 600, "y": 720, "w": 840, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 840, "h": 80 },
+			"sourceSize": { "w": 840, "h": 80 }
+		},
+		"_WallClimbNoMovement.png": {
+			"frame": { "x": 0, "y": 800, "w": 840, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 840, "h": 80 },
+			"sourceSize": { "w": 840, "h": 80 }
+		},
+		"_WallHang.png": {
+			"frame": { "x": 840, "y": 800, "w": 120, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 120, "h": 80 },
+			"sourceSize": { "w": 120, "h": 80 }
+		},
+		"_WallSlide.png": {
+			"frame": { "x": 960, "y": 800, "w": 360, "h": 80 },
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": { "x": 0, "y": 0, "w": 360, "h": 80 },
+			"sourceSize": { "w": 360, "h": 80 }
+		}
+	},
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.1",
+		"image": "images/knightAnimations.png",
+		"format": "RGBA8888",
+		"size": { "w": 1920, "h": 880 },
+		"scale": "1",
+		"smartupdate": "$TexturePacker:SmartUpdate:2b6650f78ed33bd1bb16e4a232e98cc4:64e3893151b2be24f7d98f4ac8cc09c7:da6017946742f5e2328d300859e44039$"
+	},
+	"animations": {
+		"running": ["_Run.png"]
+	}
+}

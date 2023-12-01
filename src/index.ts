@@ -5,7 +5,7 @@ import * as particleSettings from '../static/particles/sunParticles.json'
 import { Scene } from './scenes/Scene'
 
 const sunFilter = new AdvancedBloomFilter({ bloomScale: 3, blur: 15, quality: 13 })
-const solaireFilter = new AdvancedBloomFilter({ bloomScale: 0.3, blur: 1 })
+// const solaireFilter = new AdvancedBloomFilter({ bloomScale: 0.3, blur: 1 })
 const particleContainer = new ParticleContainer()
 
 const app = new Application({
@@ -16,8 +16,10 @@ const app = new Application({
 	width: 1920,
 	height: 1080,
 })
+// globalThis.__PIXI_APP__ = app
 
-const sceny: Scene = new Scene(app.screen.width, app.screen.height)
+const sceny: Scene = new Scene()
+sceny.position.set(0, app.screen.height / 2)
 
 const sun: Graphics = new Graphics()
 sun.beginFill('0xffbe6f')
@@ -62,7 +64,7 @@ quote.text = 'If only I could be so grossly incandescent!'
 quote.position.set(0, 400)
 
 app.stage.addChild(sceny, sun)
-app.stage.addChild(particleContainer)
-sceny.solaire.addChild(label, quote)
 sun.filters = [sunFilter]
-sceny.solaire.filters = [solaireFilter]
+// app.stage.addChild(particleContainer)
+// sceny.solaire.addChild(label, quote)
+// sceny.solaire.filters = [solaireFilter]
