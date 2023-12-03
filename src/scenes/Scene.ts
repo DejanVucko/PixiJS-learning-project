@@ -1,4 +1,5 @@
 import { AnimatedSprite, Container, Spritesheet, BaseTexture, Ticker } from 'pixi.js'
+import { Tween, Group } from 'tweedle.js'
 import dodgeAnimationData from '../../static/images/runAnimation.json'
 
 export class Scene extends Container {
@@ -6,7 +7,7 @@ export class Scene extends Container {
 	private readonly screenHeight: number
 
 	private knight!: AnimatedSprite
-	private readonly knightSpeed: number = 6
+	private readonly knightSpeed: number = 5
 	private goingRight: boolean = true
 
 	constructor(screenWidth: number, screenHeight: number) {
@@ -25,12 +26,24 @@ export class Scene extends Container {
 		this.knight.position.y = this.screenHeight - 170
 		this.knight.position.x = 0
 		this.knight.play()
-		this.knight.animationSpeed = 0.5
+		this.knight.animationSpeed = 0.2
 		this.knight.loop = true
 
-		Ticker.shared.add(this.onKnightFrameChange.bind(this))
-	}
+		const ticker = new Ticker()
+		ticker.autoStart = true
 
+		const group = new Group()
+
+		const tweeny = new Tween(this.knight.scale)
+		tweeny.to({ y: 1.12 }, 100).repeat(Infinity).yoyo(true).start()
+
+		group.add(tweeny)
+
+		ticker.add(this.onKnightFrameChange.bind(this)).add(() => this.updateTween(group))
+	}
+	private updateTween(group: Group): void {
+		group.update()
+	}
 	private onKnightFrameChange(deltatime: number): void {
 		if (this.goingRight) {
 			this.goRight(deltatime)
