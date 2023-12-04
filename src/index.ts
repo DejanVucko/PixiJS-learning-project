@@ -1,34 +1,33 @@
-import { Application, Graphics, ParticleContainer, Texture } from 'pixi.js'
+import { Application, Texture, Sprite } from 'pixi.js'
 import { AdvancedBloomFilter } from 'pixi-filters'
-import { Emitter, upgradeConfig } from '@pixi/particle-emitter'
-import * as particleSettings from '../static/particles/sunParticles.json'
 import { Scene } from './scenes/Scene'
 
-const sunFilter = new AdvancedBloomFilter({ bloomScale: 3, blur: 15, quality: 13 })
-const particleContainer = new ParticleContainer()
+const sunFilter = new AdvancedBloomFilter({ bloomScale: 0.2, blur: 0, quality: 15 })
 
 const app = new Application({
 	view: document.getElementById('pixi-canvas') as HTMLCanvasElement,
 	resolution: window.devicePixelRatio || 1,
 	autoDensity: true,
 	backgroundColor: 0x6495ed,
-	width: 1920,
-	height: 1080,
+	width: window.innerWidth,
+	height: window.innerHeight,
 })
-
 const sceny: Scene = new Scene(app.screen.width, app.screen.height)
 
-const sun: Graphics = new Graphics()
-sun.beginFill('0xffbe6f')
-sun.drawCircle(0, 0, 250)
-sun.endFill()
-sun.angle = 30
-sun.position.set(app.screen.width - 100, 50)
+const texture = Texture.from('images/backgroundCave.png')
 
-const emitter = new Emitter(particleContainer, upgradeConfig(particleSettings, Texture.from('images/particle.png')))
-emitter.autoUpdate = true
-emitter.updateSpawnPos(200, 0)
-emitter.emit = true
+const background: Sprite = Sprite.from(texture)
+texture.baseTexture.once('loaded', () => {
+	const imageWidth = texture.baseTexture.width
+	const imageHeight = texture.baseTexture.height
 
-app.stage.addChild(sceny, sun)
-sun.filters = [sunFilter]
+	const scale = Math.max(app.screen.width / imageWidth, app.screen.height / imageHeight)
+
+	background.scale.set(scale)
+	background.anchor.set(0.5)
+
+	background.position.set(app.screen.width / 2, app.screen.height / 2)
+})
+background.filters = [sunFilter]
+
+app.stage.addChild(background, sceny)
