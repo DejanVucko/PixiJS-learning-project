@@ -1,5 +1,6 @@
 import { AnimatedSprite, Container, Spritesheet, BaseTexture, Ticker, Sprite } from 'pixi.js'
 import { Tween, Group } from 'tweedle.js'
+import { Keyboard } from '../Keyboard'
 import dodgeAnimationData from '../../static/images/runAnimation.json'
 
 export class Scene extends Container {
@@ -9,6 +10,7 @@ export class Scene extends Container {
 	private knight!: AnimatedSprite
 	private follower!: Sprite
 	private readonly knightSpeed: number = 6
+	private jumpOnCooldown: boolean = false
 	private goingRight: boolean = true
 
 	constructor(screenWidth: number, screenHeight: number) {
@@ -33,6 +35,8 @@ export class Scene extends Container {
 		this.knight.loop = true
 		this.knight.eventMode = 'dynamic'
 
+		Keyboard.initialize()
+
 		let fairy = this.follower
 		fairy = Sprite.from('images/particle.png')
 		fairy.tint = 0xfffdd0
@@ -47,16 +51,15 @@ export class Scene extends Container {
 
 		const tweeny = new Tween(fairy.scale)
 		tweeny.to({ x: 0.5, y: 0.5 }, 800).repeat(Infinity).yoyo(true).start()
-
 		group.add(tweeny)
 
 		document.addEventListener('keydown', this.jump.bind(this))
-		document.addEventListener('keyup', this.gravity.bind(this))
-
-		ticker.add(this.onKnightFrameChange.bind(this)).add(() => this.updateTween(group))
+		const globalGroup = Group.shared
+		ticker.add(this.onKnightFrameChange.bind(this)).add(() => this.updateTween(group, globalGroup))
 	}
-	private updateTween(group: Group): void {
+	private updateTween(group: Group, group2: Group): void {
 		group.update()
+		group2.update()
 	}
 	private onKnightFrameChange(deltatime: number): void {
 		if (this.goingRight) {
@@ -66,11 +69,26 @@ export class Scene extends Container {
 		}
 	}
 	private jump(): void {
-		this.knight.y = this.knight.y - 200
+		if (Keyboard.state.get('Space') === true) {
+			const currentY = this.knight.position.y
+			const jumpHeight = 150
+
+			if (!this.jumpOnCooldown) {
+				const jumpTween = new Tween(this.knight.position)
+				jumpTween
+					.to({ y: currentY - jumpHeight }, 300)
+					.repeat(1)
+					.repeatDelay(100)
+					.yoyo(true)
+					.start()
+				this.jumpOnCooldown = true
+				setTimeout(() => {
+					this.jumpOnCooldown = false
+				}, 800)
+			}
+		}
 	}
-	private gravity(): void {
-		this.knight.y = this.knight.y - 200
-	}
+
 	private goRight(deltatime: number): void {
 		this.knight.position.x = this.knight.position.x + this.knightSpeed * deltatime
 		if (this.knight.position.x >= this.screenWidth - 25) {
