@@ -11,7 +11,6 @@ export class Scene extends Container {
 	private follower!: Sprite
 	private readonly knightSpeed: number = 6
 	private jumpOnCooldown: boolean = false
-	private goingRight: boolean = true
 
 	constructor(screenWidth: number, screenHeight: number) {
 		super()
@@ -27,7 +26,7 @@ export class Scene extends Container {
 		this.addChild(this.knight)
 		this.knight.anchor.set(0.5)
 		this.knight.position.y = this.screenHeight - 130
-		this.knight.position.x = 0
+		this.knight.position.x = this.screenWidth / 2
 		this.knight.height = 200
 		this.knight.width = 134
 		this.knight.play()
@@ -50,28 +49,24 @@ export class Scene extends Container {
 		const group = new Group()
 
 		const tweeny = new Tween(fairy.scale)
-		tweeny.to({ x: 0.5, y: 0.5 }, 800).repeat(Infinity).yoyo(true).start()
+		tweeny.to({ x: 0.5, y: 0.5 }, 2000).repeat(Infinity).yoyo(true).start()
 		group.add(tweeny)
 
 		document.addEventListener('keydown', this.jump.bind(this))
 		const globalGroup = Group.shared
-		ticker.add(this.onKnightFrameChange.bind(this)).add(() => this.updateTween(group, globalGroup))
+		ticker
+			.add(this.goRight.bind(this))
+			.add(this.goLeft.bind(this))
+			.add(() => this.updateTween(group, globalGroup))
 	}
 	private updateTween(group: Group, group2: Group): void {
 		group.update()
 		group2.update()
 	}
-	private onKnightFrameChange(deltatime: number): void {
-		if (this.goingRight) {
-			this.goRight(deltatime)
-		} else {
-			this.goLeft(deltatime)
-		}
-	}
 	private jump(): void {
 		if (Keyboard.state.get('Space') === true) {
 			const currentY = this.knight.position.y
-			const jumpHeight = 150
+			const jumpHeight = 200
 
 			if (!this.jumpOnCooldown) {
 				const jumpTween = new Tween(this.knight.position)
@@ -84,23 +79,25 @@ export class Scene extends Container {
 				this.jumpOnCooldown = true
 				setTimeout(() => {
 					this.jumpOnCooldown = false
-				}, 800)
+				}, 700)
 			}
 		}
 	}
 
 	private goRight(deltatime: number): void {
-		this.knight.position.x = this.knight.position.x + this.knightSpeed * deltatime
-		if (this.knight.position.x >= this.screenWidth - 25) {
-			this.goingRight = false
-			this.knight.scale.x = -this.knight.scale.x
+		if (Keyboard.state.get('KeyD') === true && !(this.knight.position.x >= this.screenWidth - 25)) {
+			this.knight.position.x = this.knight.position.x + this.knightSpeed * deltatime
+			this.knight.scale.x = Math.abs(this.knight.scale.x)
+		} else {
+			return
 		}
 	}
 	private goLeft(deltatime: number): void {
-		this.knight.position.x = this.knight.position.x - this.knightSpeed * deltatime
-		if (this.knight.position.x <= 0) {
-			this.goingRight = true
-			this.knight.scale.x = -this.knight.scale.x
+		if (Keyboard.state.get('KeyA') === true && !(this.knight.position.x <= 0)) {
+			this.knight.position.x = this.knight.position.x - this.knightSpeed * deltatime
+			this.knight.scale.x = -Math.abs(this.knight.scale.x)
+		} else {
+			return
 		}
 	}
 }
